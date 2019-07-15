@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="col m-5">
+    <h2>{{ topic }}</h2>
+    <hr>
+    <a href="{% url 'learning_logs:create_entry' topic.id %}">Add new entry</a>
+    <h5>Entries:</h5>
+        {% for entry in entries %}
+            <div class="card mb-3">
+                <h5 class="card-header">{{ entry.date}}</h5>
+                <div class="card-body">
+                    <p class="card-text">{{ entry.text|linebreaks }}</p>
+                    <a class="btn btn-outline-primary btn-sm"
+                       href="{% url 'learning_logs:edit_entry' entry.id %}">
+                        Edit
+                    </a>
+                    <a class="btn btn-outline-danger btn-sm"
+                       href="{% url 'learning_logs:delete_entry' entry.id %}">
+                        Delete
+                    </a>
+                </div>
+            </div>
+        {% empty %}
+            <p class="text-warning">There are no entries for this topic yet.</p>
+        {% endfor %}
+</div>
+{% endblock %}

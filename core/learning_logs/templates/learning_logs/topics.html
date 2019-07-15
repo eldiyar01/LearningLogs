@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="col mt-3">
+    <div class="list-group">
+        <div class="list-group-item">
+            <h1>Topics</h1>
+            <a href="{% url 'learning_logs:create_topic' %}"> Add new topic </a>
+        </div>
+        {% for topic in topics %}
+            <a class="list-group-item list-group-item-action list-group-item-primary"
+               href="{% url 'learning_logs:topic' topic.id %}">{{ topic }}
+            </a>
+            <p>
+                <a class="btn btn-sm btn-light text-primary"
+                   href="{% url 'learning_logs:edit_topic' topic.id %}">
+                    Edit
+                </a>
+                <a class="btn btn-sm btn-light text-danger"
+                   href="{% url 'learning_logs:delete_topic' topic.id %}">
+                    Delete
+                </a>
+            </p>
+        {% empty %}
+            <p class="list-group-item list-group-item-warning">No topics have been added yet.</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

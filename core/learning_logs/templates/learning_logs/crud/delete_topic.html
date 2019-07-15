@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="col m-5">
+    <form method="post" action="{% url 'learning_logs:delete_topic' topic.id %}">
+        {%  csrf_token %}
+        <h2>Do you really want to delete this topic: '{{topic}}'</h2>
+        <hr>
+        <p> The object will deleted without opportunity return</p>
+        <p>If you will do it then all entries in topic also will deleted</p>
+        <a class="btn btn-outline-primary" href="{% url 'learning_logs:topics' %}"> Cancel</a>
+        <button class="btn btn-outline-danger" type="submit">Delete</button>
+        </form>
+</div>
+{% endblock %}

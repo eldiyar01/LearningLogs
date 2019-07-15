@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="col m-3 p-3">
+    <h2>Signin</h2>
+    <hr>
+     {% if error %}
+        <div class="non-field-errors alert alert-danger">
+            <p class="form-error">{{ error }}</p>
+        </div>
+    {% endif %}
+    <form method="post" action="{% url 'users:sign_in' %}">
+        {% csrf_token %}
+       {% for field in form %}
+            <p>{{ field.label }}</p>
+            <p>{{ field.help_text }}</p>
+            <p>{{ field }}</p>
+        {% endfor %}
+        <p>
+            <button class="btn btn-outline-primary" type="submit">Signin</button>
+            or
+            <a href="{% url 'users:signup' %}">Signup</a>
+        </p>
+    </form>
+</div>
+{% endblock %}
